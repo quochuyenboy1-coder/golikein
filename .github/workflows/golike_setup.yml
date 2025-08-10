@@ -1,0 +1,27 @@
+name: Golike Setup
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Cài đặt Golike
+        run: |
+          sudo apt update
+          sudo apt install -y git wget curl unzip
+          git clone https://link-tool-golike-cua-ban.git golike
+          cd golike
+          chmod +x run.sh
+          ./run.sh &
+
+      - name: Mở terminal tmate
+        uses: mxschmitt/action-tmate@v3
+
+      - name: Giữ cho tool chạy
+        run: |
+          while true; do sleep 600; done
