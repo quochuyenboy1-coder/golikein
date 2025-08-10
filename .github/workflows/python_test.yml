@@ -1,0 +1,25 @@
+name: Python Bot
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *" # Chạy mỗi giờ
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tải code về
+        uses: actions/checkout@v3
+
+      - name: Cài Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Cài thư viện
+        run: pip install -r requirements.txt
+
+      - name: Chạy script
+        run: python main.py
